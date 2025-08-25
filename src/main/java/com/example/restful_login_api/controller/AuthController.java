@@ -1,5 +1,6 @@
 package com.example.restful_login_api.controller;
 import com.example.restful_login_api.domain.user.User;
+import com.example.restful_login_api.domain.user.UserRole;
 import com.example.restful_login_api.dto.LoginRequestDTO;
 import com.example.restful_login_api.dto.RegisterRequestDTO;
 import com.example.restful_login_api.dto.ResponseDTO;
@@ -33,7 +34,7 @@ public class AuthController {
 
             return ResponseEntity.ok(new ResponseDTO(user.getName(), token));
         }
-        return ResponseEntity.badRequest().build();
+        return ResponseEntity.status(401).build();
     }
 
     @PostMapping("/register")
@@ -45,12 +46,13 @@ public class AuthController {
             newUser.setName(body.name());
             newUser.setEmail(body.email());
             newUser.setPassword(passwordEncoder.encode(body.password()));
+            newUser.setRole(UserRole.USER);
             repository.save(newUser);
             String token = this.tokenService.generateToken(newUser);
 
             return ResponseEntity.ok(new ResponseDTO(newUser.getName(), token));
         }
 
-        return ResponseEntity.badRequest().build();
+        return ResponseEntity.status(409).body("E-mail já cadastrado");
     }
 }
