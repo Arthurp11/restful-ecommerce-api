@@ -4,7 +4,7 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
-import com.example.restful_login_api.domain.User;
+import com.example.restful_login_api.domain.user.User;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -21,12 +21,11 @@ public class TokenService {
         try {
             Algorithm algorithm = Algorithm.HMAC256(secret);
 
-            String token = JWT.create()
+            return JWT.create()
                     .withIssuer("restful-login-api")
                     .withSubject(user.getEmail())
                     .withExpiresAt(this.generateExpirationDate())
                     .sign(algorithm);
-            return token;
         } catch (JWTCreationException e) {
             throw new RuntimeException("Error while authenticating");
         }

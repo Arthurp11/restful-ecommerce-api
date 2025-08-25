@@ -1,12 +1,9 @@
-package com.example.login_api_with_spring_security_and_jwt.infra.security;
-import com.example.restful_login_api.infra.security.CustomUserDetailsService;
-import com.example.restful_login_api.infra.security.SecurityFilter;
+package com.example.restful_login_api.infra.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;

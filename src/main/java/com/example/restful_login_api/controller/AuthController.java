@@ -1,6 +1,5 @@
 package com.example.restful_login_api.controller;
-
-import com.example.restful_login_api.domain.User;
+import com.example.restful_login_api.domain.user.User;
 import com.example.restful_login_api.dto.LoginRequestDTO;
 import com.example.restful_login_api.dto.RegisterRequestDTO;
 import com.example.restful_login_api.dto.ResponseDTO;

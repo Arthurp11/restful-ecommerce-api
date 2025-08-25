@@ -1,5 +1,5 @@
 package com.example.restful_login_api.infra.security;
-import com.example.restful_login_api.domain.User;
+import com.example.restful_login_api.domain.user.User;
 import com.example.restful_login_api.repository.UserRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

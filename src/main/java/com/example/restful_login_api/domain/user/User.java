@@ -1,4 +1,4 @@
-package com.example.restful_login_api.domain;
+package com.example.restful_login_api.domain.user;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -15,8 +15,8 @@ import lombok.Setter;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String name;
     private String password;
     private String email;

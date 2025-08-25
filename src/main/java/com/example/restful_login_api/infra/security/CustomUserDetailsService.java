@@ -1,6 +1,6 @@
 package com.example.restful_login_api.infra.security;
 
-import com.example.restful_login_api.domain.User;
+import com.example.restful_login_api.domain.user.User;
 import com.example.restful_login_api.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
