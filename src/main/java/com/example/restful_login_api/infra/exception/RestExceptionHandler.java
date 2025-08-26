@@ -9,7 +9,6 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @RestController
 @ControllerAdvice
@@ -25,7 +24,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    @ExceptionHandler(UserNotFoundException.class)
+    @ExceptionHandler(ResourceNotFoundException.class)
     public final ResponseEntity<ExceptionResponse> handleUserNotFoundException(Exception ex, WebRequest request) {
         ExceptionResponse response = new ExceptionResponse(
                 LocalDateTime.now().plusHours(2).toInstant(java.time.ZoneOffset.of("-03:00")),

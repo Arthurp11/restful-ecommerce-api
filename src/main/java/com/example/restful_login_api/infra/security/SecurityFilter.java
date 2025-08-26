@@ -1,5 +1,5 @@
 package com.example.restful_login_api.infra.security;
-import com.example.restful_login_api.infra.exception.UserNotFoundException;
+import com.example.restful_login_api.infra.exception.ResourceNotFoundException;
 import com.example.restful_login_api.repository.UserRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -27,7 +27,7 @@ public class SecurityFilter extends OncePerRequestFilter {
         var login = tokenService.validateToken(token);
 
         if(login != null){
-            UserDetails user = userRepository.findByEmail(login).orElseThrow(() -> new UserNotFoundException("User not found"));
+            UserDetails user = userRepository.findByEmail(login).orElseThrow(() -> new ResourceNotFoundException("User not found"));
             var authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }

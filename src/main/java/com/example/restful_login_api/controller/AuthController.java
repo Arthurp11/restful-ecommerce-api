@@ -1,10 +1,10 @@
 package com.example.restful_login_api.controller;
 import com.example.restful_login_api.domain.user.User;
 import com.example.restful_login_api.domain.user.UserRole;
-import com.example.restful_login_api.dto.LoginRequestDTO;
-import com.example.restful_login_api.dto.RegisterRequestDTO;
-import com.example.restful_login_api.dto.ResponseDTO;
-import com.example.restful_login_api.infra.exception.UserNotFoundException;
+import com.example.restful_login_api.dto.auth.LoginRequestDTO;
+import com.example.restful_login_api.dto.auth.RegisterRequestDTO;
+import com.example.restful_login_api.dto.auth.ResponseDTO;
+import com.example.restful_login_api.infra.exception.ResourceNotFoundException;
 import com.example.restful_login_api.infra.security.TokenService;
 import com.example.restful_login_api.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -28,7 +28,7 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody LoginRequestDTO body) {
         User user = repository.findByEmail(body.email())
-                .orElseThrow(() -> new UserNotFoundException("User not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
         if (passwordEncoder.matches(body.password(), user.getPassword())) {
             String token = this.tokenService.generateToken(user);
 

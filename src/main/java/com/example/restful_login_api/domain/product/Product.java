@@ -25,7 +25,7 @@ public class Product {
     private String description;
     private String brand;
     private BigDecimal price;
-    private int inventory;
+    private Integer inventory;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "category_id", referencedColumnName = "id")
