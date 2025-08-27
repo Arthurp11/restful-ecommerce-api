@@ -1,8 +1,7 @@
 package com.example.restful_login_api.dto.product;
 
-import com.example.restful_login_api.domain.category.Category;
-
 import java.math.BigDecimal;
+import java.util.List;
 
 public record ProductResponseDTO(Long id,
                                  String name,
@@ -10,4 +9,5 @@ public record ProductResponseDTO(Long id,
                                  String brand,
                                  BigDecimal price,
                                  Integer inventory,
-                                 Category category) {}
+                                 String categoryName,
+                                 List<String> images) {}

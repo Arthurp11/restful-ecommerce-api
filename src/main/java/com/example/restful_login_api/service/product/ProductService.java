@@ -1,6 +1,7 @@
 package com.example.restful_login_api.service.product;
 
 import com.example.restful_login_api.domain.category.Category;
+import com.example.restful_login_api.domain.image.Image;
 import com.example.restful_login_api.domain.product.Product;
 import com.example.restful_login_api.dto.product.CreateProductDTO;
 import com.example.restful_login_api.dto.product.ProductResponseDTO;
@@ -8,7 +9,6 @@ import com.example.restful_login_api.infra.exception.ResourceNotFoundException;
 import com.example.restful_login_api.repository.CategoryRepository;
 import com.example.restful_login_api.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -32,16 +32,21 @@ public class ProductService {
 
     public List<ProductResponseDTO> getAllProducts(int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
-        Page<Product> productsPage = this.productRepository.findAll(pageable);
-        return productsPage.map(product -> new ProductResponseDTO(
-        product.getId(),
-        product.getName(),
-        product.getDescription(),
-        product.getBrand(),
-        product.getPrice(),
-        product.getInventory(),
-        product.getCategory()
-        )).stream().toList();
+        List<Product> products = this.productRepository.findAllWithImages(pageable);
+        return products.stream()
+                .map(product -> new ProductResponseDTO(
+                        product.getId(),
+                        product.getName(),
+                        product.getDescription(),
+                        product.getBrand(),
+                        product.getPrice(),
+                        product.getInventory(),
+                        product.getCategory().getName(),
+                        product.getImages().stream()
+                                .map(Image::getDownloadUrl)
+                                .toList()
+                ))
+                .toList();
     }
 
     public Product createProduct(CreateProductDTO product) {
