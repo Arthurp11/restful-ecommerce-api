@@ -1,15 +1,12 @@
-package com.example.restful_login_api.service.image;
+package com.example.restful_login_api.service;
 
-import com.example.restful_login_api.domain.image.Image;
-import com.example.restful_login_api.domain.product.Product;
+import com.example.restful_login_api.domain.Image;
+import com.example.restful_login_api.domain.Product;
 import com.example.restful_login_api.infra.exception.ResourceNotFoundException;
 import com.example.restful_login_api.repository.ImageRepository;
-import com.example.restful_login_api.service.product.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
-import javax.imageio.IIOException;
 import javax.sql.rowset.serial.SerialBlob;
 import java.io.IOException;
 import java.sql.SQLException;

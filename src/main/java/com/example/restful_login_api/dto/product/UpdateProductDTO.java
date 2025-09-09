@@ -6,6 +6,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 public record UpdateProductDTO(
+        Long id,
         String name,
         String description,
         String brand,

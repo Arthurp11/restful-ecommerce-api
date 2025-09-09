@@ -73,9 +73,9 @@ public class ProductService {
         return productRepository.save(newProduct);
     }
 
-    public Product updateProduct(UpdateProductDTO product, Long productId) {
-        Product existingProduct = productRepository.findById(productId)
-                .orElseThrow(() -> new ResourceNotFoundException("Product not found with id: " + productId));
+    public Product updateProduct(UpdateProductDTO product) {
+        Product existingProduct = productRepository.findById(product.id())
+                .orElseThrow(() -> new ResourceNotFoundException("Product not found with id: " + product.id()));
 
         existingProduct.setName(product.name());
         existingProduct.setDescription(product.description());

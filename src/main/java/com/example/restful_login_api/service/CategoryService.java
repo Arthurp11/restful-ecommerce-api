@@ -1,12 +1,9 @@
-package com.example.restful_login_api.service.category;
+package com.example.restful_login_api.service;
 
-import com.example.restful_login_api.domain.category.Category;
-import com.example.restful_login_api.domain.image.Image;
-import com.example.restful_login_api.domain.product.Product;
+import com.example.restful_login_api.domain.Category;
 import com.example.restful_login_api.dto.category.CategoryResponseDTO;
 import com.example.restful_login_api.dto.category.CreateCategoryDTO;
 import com.example.restful_login_api.dto.category.UpdateCategoryDTO;
-import com.example.restful_login_api.dto.product.ProductResponseDTO;
 import com.example.restful_login_api.infra.exception.ResourceNotFoundException;
 import com.example.restful_login_api.repository.CategoryRepository;
 import org.hibernate.sql.Update;
