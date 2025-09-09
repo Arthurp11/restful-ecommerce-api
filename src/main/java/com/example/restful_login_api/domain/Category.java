@@ -1,6 +1,5 @@
-package com.example.restful_login_api.domain.category;
+package com.example.restful_login_api.domain;
 
-import com.example.restful_login_api.domain.product.Product;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

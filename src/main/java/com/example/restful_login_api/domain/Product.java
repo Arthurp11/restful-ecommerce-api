@@ -1,7 +1,5 @@
-package com.example.restful_login_api.domain.product;
+package com.example.restful_login_api.domain;
 
-import com.example.restful_login_api.domain.category.Category;
-import com.example.restful_login_api.domain.image.Image;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

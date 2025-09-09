@@ -1,4 +1,4 @@
-package com.example.restful_login_api.domain.user;
+package com.example.restful_login_api.domain;
 
 public enum UserRole {
 

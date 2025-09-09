@@ -1,10 +1,11 @@
-package com.example.restful_login_api.service.product;
+package com.example.restful_login_api.service;
 
-import com.example.restful_login_api.domain.category.Category;
-import com.example.restful_login_api.domain.image.Image;
-import com.example.restful_login_api.domain.product.Product;
+import com.example.restful_login_api.domain.Category;
+import com.example.restful_login_api.domain.Image;
+import com.example.restful_login_api.domain.Product;
 import com.example.restful_login_api.dto.product.CreateProductDTO;
 import com.example.restful_login_api.dto.product.ProductResponseDTO;
+import com.example.restful_login_api.dto.product.UpdateProductDTO;
 import com.example.restful_login_api.infra.exception.ResourceNotFoundException;
 import com.example.restful_login_api.repository.CategoryRepository;
 import com.example.restful_login_api.repository.ProductRepository;
@@ -60,21 +61,36 @@ public class ProductService {
         newProduct.setPrice(product.price());
         newProduct.setInventory(product.inventory());
         newProduct.setCategory(category);
+        newProduct.setImages(product.images().stream()
+                .map(imgUrl -> {
+                    Image img = new Image();
+                    img.setDownloadUrl(String.valueOf(imgUrl));
+                    img.setProduct(newProduct);
+                    return img;
+                })
+                .toList());
 
         return productRepository.save(newProduct);
     }
 
-    public Product updateProduct(Product product, Long productId) {
+    public Product updateProduct(UpdateProductDTO product, Long productId) {
         Product existingProduct = productRepository.findById(productId)
                 .orElseThrow(() -> new ResourceNotFoundException("Product not found with id: " + productId));
 
-        existingProduct.setName(product.getName());
-        existingProduct.setDescription(product.getDescription());
-        existingProduct.setBrand(product.getBrand());
-        existingProduct.setPrice(product.getPrice());
-        existingProduct.setInventory(product.getInventory());
-        existingProduct.setCategory(product.getCategory());
-        existingProduct.setImages(product.getImages());
+        existingProduct.setName(product.name());
+        existingProduct.setDescription(product.description());
+        existingProduct.setBrand(product.brand());
+        existingProduct.setPrice(product.price());
+        existingProduct.setInventory(product.inventory());
+        existingProduct.setCategory(product.category());
+        existingProduct.setImages(product.images().stream()
+                .map(imgUrl -> {
+                    Image img = new Image();
+                    img.setDownloadUrl(String.valueOf(imgUrl));
+                    img.setProduct(existingProduct);
+                    return img;
+                })
+                .toList());
 
         return productRepository.save(existingProduct);
     }
