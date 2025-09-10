@@ -41,9 +41,9 @@ public class CategoryService {
         return categoryRepository.save(newCategory);
     }
 
-    public Category updateCategory(Long id, UpdateCategoryDTO category) {
-        Category existingCategory = categoryRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("No category found with id: " + id));
+    public Category updateCategory(UpdateCategoryDTO category) {
+        Category existingCategory = categoryRepository.findById(category.id())
+                .orElseThrow(() -> new ResourceNotFoundException("No category found with id: " + category.id()));
         existingCategory.setName(category.name());
         return categoryRepository.save(existingCategory);
     }

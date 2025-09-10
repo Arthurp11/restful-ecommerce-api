@@ -31,15 +31,13 @@ public class ProductController {
         return ResponseEntity.ok(products);
     }
 
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping()
     public ResponseEntity<Product> createProduct(@RequestBody CreateProductDTO product) {
         Product newProduct = productService.createProduct(product);
         return ResponseEntity.ok(newProduct);
     }
 
-    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping()
     public ResponseEntity<Product> updateProduct(@RequestBody UpdateProductDTO product) {
         Product updatedProduct = productService.updateProduct(product);
         return ResponseEntity.ok(updatedProduct);
