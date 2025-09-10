@@ -1,5 +1,6 @@
 package com.example.restful_login_api.controller;
 
+import com.example.restful_login_api.domain.Image;
 import com.example.restful_login_api.domain.Product;
 import com.example.restful_login_api.dto.product.CreateProductDTO;
 import com.example.restful_login_api.dto.product.ProductResponseDTO;
@@ -21,13 +22,20 @@ public class ProductController {
     @Autowired
     ProductService productService;
 
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<Product> getProductById(@PathVariable Long id) {
+        Product product = productService.getProductById(id);
+        return ResponseEntity.ok(product);
+    }
+
     @GetMapping("/all")
     public ResponseEntity<List<ProductResponseDTO>> getProducts(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size) {
         List<ProductResponseDTO> products = productService.getAllProducts(page, size);
         return ResponseEntity.ok(products);
     }
 
-    @PostMapping()
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Product> createProduct(@RequestBody CreateProductDTO product) {
         Product newProduct = productService.createProduct(product);
         return ResponseEntity.ok(newProduct);

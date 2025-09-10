@@ -61,14 +61,19 @@ public class ProductService {
         newProduct.setPrice(product.price());
         newProduct.setInventory(product.inventory());
         newProduct.setCategory(category);
-        newProduct.setImages(product.images().stream()
-                .map(imgUrl -> {
-                    Image img = new Image();
-                    img.setDownloadUrl(String.valueOf(imgUrl));
-                    img.setProduct(newProduct);
-                    return img;
-                })
-                .toList());
+
+        if (product.images() != null && !product.images().isEmpty()) {
+            newProduct.setImages(product.images().stream()
+                    .map(imgUrl -> {
+                        Image img = new Image();
+                        img.setDownloadUrl(String.valueOf(imgUrl));
+                        img.setProduct(newProduct);
+                        return img;
+                    })
+                    .toList());
+        } else {
+            newProduct.setImages(List.of());
+        }
 
         return productRepository.save(newProduct);
     }
@@ -83,14 +88,19 @@ public class ProductService {
         existingProduct.setPrice(product.price());
         existingProduct.setInventory(product.inventory());
         existingProduct.setCategory(product.category());
-        existingProduct.setImages(product.images().stream()
-                .map(imgUrl -> {
-                    Image img = new Image();
-                    img.setDownloadUrl(String.valueOf(imgUrl));
-                    img.setProduct(existingProduct);
-                    return img;
-                })
-                .toList());
+
+        if (product.images() != null && !product.images().isEmpty()) {
+            existingProduct.setImages(product.images().stream()
+                    .map(imgUrl -> {
+                        Image img = new Image();
+                        img.setDownloadUrl(String.valueOf(imgUrl));
+                        img.setProduct(existingProduct);
+                        return img;
+                    })
+                    .toList());
+        } else {
+            existingProduct.setImages(List.of());
+        }
 
         return productRepository.save(existingProduct);
     }
